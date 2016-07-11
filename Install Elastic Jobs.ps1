@@ -62,11 +62,6 @@ Unblock-File .\InstallElasticDatabaseJobs.ps1
 #Step 2 : Install
 ########################
 
-#Some defaults are:
-#$ServiceWorkerCount = "1"
-#$ServiceVmSize = "A0"
-#$SqlServerDatabaseSlo = "S0"
-
 .\InstallElasticDatabaseJobs.ps1 `
 -ResourceGroupName $resourceGroupgName `
 -ResourceGroupLocation $resourceGroupLocation `
