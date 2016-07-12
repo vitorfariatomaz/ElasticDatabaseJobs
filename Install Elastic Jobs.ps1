@@ -10,6 +10,8 @@
 # Parameters
 ########################
 
+$homeDir = [Environment]::GetFolderPath("UserProfile")
+cd $homeDir
 $FolderName = "ElasticDatabaseJobs"
 
 #It is not recommended to change this value, portal will not detect installation if changed
@@ -53,14 +55,15 @@ Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
 #Get nuget package 
 .\nuget.exe install Microsoft.Azure.SqlDatabase.Jobs -prerelease
 
-#Install Elastic Jobs
-cd .\Microsoft.Azure.SqlDatabase.Jobs.*
-cd tools
-Unblock-File .\InstallElasticDatabaseJobs.ps1
-
 ########################
 #Step 2 : Install
 ########################
+
+cd .\Microsoft.Azure.SqlDatabase.Jobs.*
+cd tools
+
+#Install Elastic Jobs Cmdlets
+Unblock-File .\InstallElasticDatabaseJobs.ps1
 
 .\InstallElasticDatabaseJobs.ps1 `
 -ResourceGroupName $resourceGroupgName `
@@ -68,5 +71,13 @@ Unblock-File .\InstallElasticDatabaseJobs.ps1
 -ServiceName $serverAndStorageName `
 -NoPrompt
 
-#Uninstall
+########################
+#Other Options
+########################
+
+## Uninstall ###########################
 #.\UninstallElasticDatabaseJobs.ps1 -ResourceGroupName $rgName
+
+## Install Elastic Jobs Cmdlets ########
+#Unblock-File .\InstallElasticDatabaseJobsCmdlets.ps1
+#.\InstallElasticDatabaseJobsCmdlets.ps1
